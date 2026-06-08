@@ -198,7 +198,10 @@ Periodic health-check of the entire wiki:
 - **Always work on a feature branch** — never commit to master directly.
 - Commit after every ingest or significant update.
 - Commit messages follow the format: `ingest: <title>` or `update: <description>`.
-- After pushing the branch, create a PR for review.
+- After pushing the branch, create a PR for review:
+  - Load the `wiki-pr-description` skill to generate a standardized PR body
+  - Use `git diff --stat origin/master...HEAD` and `git log` to inspect actual changes
+  - PR body must include: file change table, scope of impact, new rules (if any)
 - **After the PR is merged**, delete the feature branch (both local and remote):
   ```bash
   git checkout master && git pull origin master
