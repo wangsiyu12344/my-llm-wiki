@@ -78,6 +78,31 @@ Rules for multi-level organization:
 
 ## Operations
 
+### 0. Pre-Operation: Check Open PRs
+
+**Before every wiki operation**, check if any open PRs have been merged:
+
+```bash
+# Check PR status via GitHub API
+python3 -c "
+import json, urllib.request
+t = open('/home/ubuntu/.gh_token').read().strip()
+r = urllib.request.Request('https://api.github.com/repos/wangsiyu12344/my-llm-wiki/pulls?state=all&per_page=10',
+    headers={'Authorization':f'token {t}','Accept':'application/vnd.github.v3+json'})
+prs = json.loads(urllib.request.urlopen(r).read())
+for p in prs:
+    if p['state'] == 'closed' and p.get('merged_at'):
+        print(f'MERGED: PR #{p[\"number\"]} — {p[\"title\"]}')
+"
+```
+
+If any PRs are merged but branches still exist locally:
+```bash
+git checkout master && git pull origin master
+git branch -d <branch-name>
+# Remote deletion is automatic (delete_branch_on_merge enabled)
+```
+
 ### 1. Ingest
 
 When I send new content:
@@ -85,8 +110,19 @@ When I send new content:
 1. **Read** the source. If URL → fetch and extract content. If image →
    read the text. If plain note → take as-is.
 
-2. **Git-history-based integration** — before writing anything, use git to
-   understand the existing knowledge landscape:
+2. **Browse existing directories first** — before any detection or writing:
+   - List all directories under `wiki/zh/` (parent + subdirectories) to understand
+     the full taxonomy: `find wiki/zh -type d | sort`
+   - Read `INDEX.md` to see every page's location and summary
+   - This ensures you know the complete landscape — which directories exist,
+     what pages they contain, and where new content might fit
+   - **Prefer updating existing pages** over creating new ones. If a page already
+     covers the topic (even partially), merge new content into it rather than
+     creating a duplicate. Only create a new page when no existing page covers
+     the territory.
+
+3. **Git-history-based integration** — use git to understand the existing
+   knowledge landscape:
    - `git log --oneline -20` — review recent changes for context
    - `git log --all --oneline -- wiki/<lang>/<path>` — trace the evolution
      of related pages
@@ -96,7 +132,7 @@ When I send new content:
    This step surfaces: which pages are frequently updated (hot topics),
    which are stale, and where the wiki's attention is currently focused.
 
-3. **Detect relationships** — scan existing wiki pages:
+4. **Detect relationships** — scan existing wiki pages:
    - **Conflict**: Does the new content contradict existing claims? If yes,
      tell me immediately with both claims side-by-side. Let ME decide how
      to resolve the contradiction. Do NOT overwrite without my approval.
@@ -108,11 +144,11 @@ When I send new content:
    - **New topic**: Only create a brand-new page if the content is genuinely
      novel with no existing page to merge into.
 
-4. **Discuss** — tell me 2-3 key takeaways you found interesting. If conflicts
+5. **Discuss** — tell me 2-3 key takeaways you found interesting. If conflicts
    were detected, present them clearly. Ask if I have additional thoughts or
    want to go deeper on any aspect.
 
-5. **Write/Update** pages in **all three languages** (`zh/`, `en/`, `ja/`):
+6. **Write/Update** pages in **all three languages** (`zh/`, `en/`, `ja/`):
    - Write the source-language version first, then translate to the other two
    - File naming: lowercase, hyphens. Concept or topic pages: `<slug>.md`.
    - Organize into subdirectories when 3+ pages share a theme
@@ -130,15 +166,15 @@ When I send new content:
    - `updated` = last modification date (set on every update).
    - When updating existing pages, keep the original `date`, update `updated`.
 
-6. **Cross-reference** — every page must have a `## Related` section at the
+7. **Cross-reference** — every page must have a `## Related` section at the
    bottom with `[[wikilinks]]` to other wiki pages. When new connections
    emerge, update the related pages too. For pages in subdirectories, use
    relative wikilinks: `[[../concepts/some-page]]`.
 
-7. **Update INDEX.md** — add or update the page entry in the trilingual catalog,
+8. **Update INDEX.md** — add or update the page entry in the trilingual catalog,
    grouped by subdirectory if applicable.
 
-8. **Append log.md** — add an entry:
+9. **Append log.md** — add an entry:
    ```
    ## [YYYY-MM-DD] ingest | Title of Source
    - Created: [[wiki/zh/agents/slug]], [[wiki/en/agents/slug]], [[wiki/ja/agents/slug]]
@@ -147,9 +183,9 @@ When I send new content:
    - Key takeaway: one sentence summary
    ```
 
-9. **Commit** — `git add -A && git commit -m "ingest: Title of Source"`
+10. **Commit** — `git add -A && git commit -m "ingest: Title of Source"`
 
-10. **Push & Create PR** — push the branch and create a pull request for review:
+11. **Push & Create PR** — push the branch and create a pull request for review:
     ```bash
     git push -u origin <branch-name>
     gh pr create --base master --head <branch-name> --title "..." --body "..."
@@ -205,4 +241,5 @@ Periodic health-check of the entire wiki:
   git branch -d <branch-name>
   git push origin --delete <branch-name>
   ```
+- **Check open PRs before every wiki operation** (see Section 0 above).
 - The repo is pushed to my private remote after each session.
