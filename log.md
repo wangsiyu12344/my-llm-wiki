@@ -4,6 +4,17 @@
 
 ---
 
+## [2026-06-08] ingest | Agent 沙盒开发 (SIYU)
+
+- **Source**: SIYU — Discord #my-knowledge-base
+- **Created**:
+  - [[ai-development/sandbox-development]] (zh/en/ja) — 沙盒开发：隔离环境、挂载目录持久化
+- **Updated**: *none*
+- **Conflict**: *none*
+- **Key takeaway**: 开发用沙盒 + 挂载目录（方案 A）是最佳实践，兼顾安全隔离和代码持久化。
+
+---
+
 ## [2026-06-08] update | AGENTS.md improvements + multi-level dir support
 
 - **Changes**:
