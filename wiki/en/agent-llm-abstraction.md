@@ -12,19 +12,19 @@ source_url: "https://github.com/datawhalechina/hello-agents/blob/main/docs/chapt
 
 ## Overview
 
-HelloAgents implements a unified LLM abstraction layer through the `HelloAgentsLLM` class, shielding agents from provider-specific differences. Agents don't need to know whether the underlying call goes to OpenAI, ModelScope, VLLM, or Ollama.
+HelloAgents implements a unified LLM abstraction layer through the `HelloAgentsLLM` class, shielding the differences between providers so that Agents don't need to care whether the underlying call goes to OpenAI, ModelScope, VLLM, or Ollama.
 
 ## Core Design
 
-### Inheritance-Based Extension
+### Inheritance-Based Extension Mechanism
 
-New providers are added by subclassing `HelloAgentsLLM` and overriding `__init__` — no framework source modification needed:
+Without modifying the framework source code, new provider support is added by inheriting `HelloAgentsLLM` and overriding `__init__`:
 
 ```python
 class MyLLM(HelloAgentsLLM):
     def __init__(self, ..., provider="auto", **kwargs):
         if provider == "modelscope":
-            # Custom handling for ModelScope credentials and defaults
+            # Custom handling of ModelScope credentials and defaults
             self._client = OpenAI(api_key=..., base_url=...)
         else:
             super().__init__(...)
@@ -34,32 +34,32 @@ Key point: the `else` branch falls back to the parent class, ensuring unmatched 
 
 ### Auto-Detection Mechanism
 
-`_auto_detect_provider` infers the provider by priority:
+`_auto_detect_provider` automatically infers the provider by priority:
 
-1. **Environment variable checks**: `OPENAI_API_KEY` / `MODELSCOPE_API_KEY` etc.
+1. **Environment variable checks**: `OPENAI_API_KEY` / `MODELSCOPE_API_KEY` and other specific variables
 2. **base_url pattern matching**: `:11434` → Ollama, `:8000` → VLLM
-3. **API key format hints**: e.g., `ms-` prefix
-4. **Default fallback**: `'auto'` with generic config
+3. **API key format**: e.g., `ms-` prefix for auxiliary judgment
+4. **Default fallback**: `'auto'`, using generic configuration
 
-After detection, `_resolve_credentials` fills in default `base_url` and API key based on the inference result.
+After detection, `_resolve_credentials` fills in the default `base_url` and API key based on the inference result.
 
 ### Local Model Support
 
-Two local inference backends are supported:
+Two local inference solutions are supported:
 
-- **VLLM**: High-performance inference, launched via `python -m vllm.entrypoints.openai.api_server`, exposes an OpenAI-compatible endpoint
+- **VLLM**: High-performance inference framework, launching an OpenAI-compatible service via `python -m vllm.entrypoints.openai.api_server`
 - **Ollama**: One-click local model management — `ollama run llama3` starts the service
 
-Both connect through the standard OpenAI interface, requiring no special handling in the framework.
+Both connect through the standard OpenAI interface, requiring no special handling from the framework.
 
 ## Design Principles
 
-1. **Zero-code switching**: Change providers via environment variables only
-2. **Provider transparency**: Agent code is unaware of which LLM is used underneath
-3. **Easy extension**: Subclass one class, override one method to add a provider
+1. **Zero-code integration**: Switch providers just by configuring environment variables
+2. **Provider transparency**: Agent code is unaware of which LLM is being used underneath
+3. **Easy to extend**: Inherit one class, override one method to add a new provider
 4. **Sensible defaults**: Every provider has preset base_url and default model
 
 ## Related
 
 - [[hello-agents-framework]] — HelloAgents framework overview
-- [[agent-paradigms]] — Five agent paradigms using this LLM layer
+- [[agent-paradigms]] — Five Agent paradigms using this LLM layer
