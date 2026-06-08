@@ -12,39 +12,39 @@ source_url: "https://github.com/datawhalechina/hello-agents/blob/main/docs/chapt
 
 ## Overview
 
-HelloAgents is a lightweight AI agent framework introduced in Datawhale's *Hello Agents* tutorial, designed to guide learners through building an agent framework from scratch. It is education-oriented rather than production-grade, with the core philosophy that "everything is a tool."
+HelloAgents is a lightweight AI Agent framework introduced in Datawhale's *Hello Agents* tutorial that guides readers through building an agent framework from scratch. It is not a production-grade heavy framework, but rather an **education-oriented** one, with the core philosophy that "Everything is a Tool."
 
 ## Design Philosophy
 
-1. **Lightweight + Education-Friendly**: Core code is organized by chapter with minimal dependencies (only essential libraries like the OpenAI SDK), maximizing readability. Learners can trace specific lines of code rather than getting lost in sprawling framework internals.
+1. **Lightweight + Education-Friendly**: Core code is organized by chapter, with minimal dependencies (only essential libraries like the OpenAI SDK), and high readability. Learners can trace specific lines of code rather than getting lost in tens of thousands of lines of framework code.
 
-2. **Standards-Based API**: Fully compatible with the OpenAI API specification, making migration and integration straightforward. Any OpenAI-compatible service, including local models, can be plugged in.
+2. **Standards-Based API**: Fully compatible with the OpenAI API specification, making migration and integration low-cost. Any OpenAI-compatible service (including local models) can be plugged in.
 
-3. **Progressive Learning Path**: The framework iterates through pip versions (e.g., `hello-agents==0.1.1`), with each version corresponding to a learning chapter, allowing learners to progress step by step.
+3. **Progressive Learning Path**: The framework iterates through pip versions (e.g., `hello-agents==0.1.1`), with each version corresponding to a learning chapter, allowing learners to go deeper step by step.
 
-4. **Unified Tool Abstraction**: Complex modules like Memory, RAG, and MCP are all abstracted as "tools." This reduces abstraction layers and returns to the core Agent logic: calling tools to accomplish tasks.
+4. **Unified Tool Abstraction**: Complex modules like Memory, RAG, and MCP are all uniformly abstracted as "tools." This reduces abstraction layers and returns to the essence of an Agent — calling tools to accomplish tasks.
 
-## Architecture
+## Architecture Layers
 
 ```
 hello_agents/
-├── core/          # Core framework layer (Agent base class, LLM interface, messaging, config)
+├── core/          # Core framework layer (Agent base class, LLM interface, message system, config management)
 ├── agents/        # Agent implementation layer (Simple, ReAct, Reflection, PlanAndSolve)
-└── tools/         # Tool system layer (base, registry, async executor, built-in tools)
+└── tools/         # Tool system layer (base, registry, async execution, built-in tools)
 ```
 
-The three-layer separation allows each layer to be extended independently: you can add a new LLM provider without touching agent logic, or add a new agent paradigm without modifying the tool system.
+The three-layer separation allows each layer to be extended independently: you can add a new LLM provider without touching Agent logic, or add a new Agent paradigm without modifying the tool system.
 
-## Why Build Your Own?
+## Why Build Your Own Framework?
 
-Mainstream frameworks like LangChain have notable pain points:
+Mainstream frameworks (like LangChain) have the following pain points:
 
-- **Over-abstraction**: Too many concepts; even simple tasks require extensive prerequisite knowledge
+- **Over-abstraction**: Too many concepts — even simple tasks require understanding a large amount of prerequisite knowledge
 - **API Instability**: Rapid version iteration with high maintenance costs
-- **Black-box Logic**: Opaque core implementations make deep customization difficult
+- **Black-box Logic**: Core implementations are opaque, making deep customization difficult
 - **Dependency Complexity**: Large package sizes with frequent dependency conflicts
 
-Building your own framework offers deep understanding of agent internals, full control over behavior, and systems design skills. This is especially valuable in vertical domains (finance, healthcare, education) where customization needs often exceed what general-purpose frameworks provide.
+The value of building your own framework lies in: deep understanding of how Agents work; complete control; and cultivating systems design skills. Especially in vertical domains (finance, healthcare, education), customization needs often far exceed the flexibility that general-purpose frameworks can provide.
 
 ## Related
 
