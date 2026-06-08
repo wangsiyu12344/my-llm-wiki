@@ -27,9 +27,9 @@ llm-wiki/
 ├── INDEX.md           # Trilingual catalog of all wiki pages
 ├── log.md             # Append-only chronological timeline
 └── wiki/
-    ├── zh/            # 中文 wiki pages
-    ├── en/            # English wiki pages
-    └── ja/            # 日本語 wiki pages
+    ├── zh/            # 中文 wiki pages (supports multi-level subdirs)
+    ├── en/            # English wiki pages (supports multi-level subdirs)
+    └── ja/            # 日本語 wiki pages (supports multi-level subdirs)
 ```
 
 No `sources/` directory — raw sources are processed on ingest and not persisted,
@@ -40,13 +40,41 @@ to save memory and disk space.
 Every wiki page exists in **three languages** with identical structure under
 `wiki/zh/`, `wiki/en/`, `wiki/ja/`. When you create or update a page:
 
-1. Always write/update all three language versions.
-2. Content must be semantically identical across languages — not machine
-   translation, but natural, well-written prose in each language.
-3. Keep the same filename slug across all three directories so pages can
+1. **Write the source-language version first** — match the language of the
+   original source. If the source is in Chinese, write Chinese first. If in
+   English, write English first. This preserves fidelity to the original.
+2. **Then translate** to the other two languages. Content must be semantically
+   identical across languages — natural, well-written prose, not machine
+   translation.
+3. Keep the **same relative path** across all three directories so pages can
    be switched by changing the language prefix.
-   Example: `wiki/zh/transformers.md` ↔ `wiki/en/transformers.md` ↔ `wiki/ja/transformers.md`
+   Example: `wiki/zh/agents/react.md` ↔ `wiki/en/agents/react.md` ↔ `wiki/ja/agents/react.md`
 4. When I read a page, default to Chinese unless I specify otherwise.
+
+## Multi-Level Directory Support
+
+Pages can be organized into subdirectories under each language directory.
+Use this to group related pages into logical clusters:
+
+```
+wiki/zh/
+├── agents/           # Agent-related pages
+│   ├── paradigms.md
+│   └── tool-system.md
+├── llm/              # LLM-related pages
+│   ├── abstraction.md
+│   └── providers.md
+├── frameworks/       # Framework-specific pages
+│   └── hello-agents.md
+└── concepts/         # General concepts (fallback)
+    └── ...
+```
+
+Rules for multi-level organization:
+- Create a subdirectory when 3+ pages share a common theme
+- Same directory structure across all three languages
+- INDEX.md entries include the full relative path
+- New pages go into the most specific directory that applies; use `concepts/` as fallback
 
 ## Operations
 
@@ -57,7 +85,18 @@ When I send new content:
 1. **Read** the source. If URL → fetch and extract content. If image →
    read the text. If plain note → take as-is.
 
-2. **Detect relationships** — before writing anything, scan existing wiki pages:
+2. **Git-history-based integration** — before writing anything, use git to
+   understand the existing knowledge landscape:
+   - `git log --oneline -20` — review recent changes for context
+   - `git log --all --oneline -- wiki/<lang>/<path>` — trace the evolution
+     of related pages
+   - `git diff master -- wiki/` — see what changed since last merge
+   - Use `search_files` across existing pages to find related entities/concepts
+
+   This step surfaces: which pages are frequently updated (hot topics),
+   which are stale, and where the wiki's attention is currently focused.
+
+3. **Detect relationships** — scan existing wiki pages:
    - **Conflict**: Does the new content contradict existing claims? If yes,
      tell me immediately with both claims side-by-side. Let ME decide how
      to resolve the contradiction. Do NOT overwrite without my approval.
@@ -69,12 +108,14 @@ When I send new content:
    - **New topic**: Only create a brand-new page if the content is genuinely
      novel with no existing page to merge into.
 
-3. **Discuss** — tell me 2-3 key takeaways you found interesting. If conflicts
+4. **Discuss** — tell me 2-3 key takeaways you found interesting. If conflicts
    were detected, present them clearly. Ask if I have additional thoughts or
    want to go deeper on any aspect.
 
-4. **Write/Update** pages in **all three languages** (`zh/`, `en/`, `ja/`):
+5. **Write/Update** pages in **all three languages** (`zh/`, `en/`, `ja/`):
+   - Write the source-language version first, then translate to the other two
    - File naming: lowercase, hyphens. Concept or topic pages: `<slug>.md`.
+   - Organize into subdirectories when 3+ pages share a theme
    - YAML frontmatter at the top of every page:
      ```yaml
      ---
@@ -89,22 +130,31 @@ When I send new content:
    - `updated` = last modification date (set on every update).
    - When updating existing pages, keep the original `date`, update `updated`.
 
-5. **Cross-reference** — every page must have a `## Related` section at the
+6. **Cross-reference** — every page must have a `## Related` section at the
    bottom with `[[wikilinks]]` to other wiki pages. When new connections
-   emerge, update the related pages too.
+   emerge, update the related pages too. For pages in subdirectories, use
+   relative wikilinks: `[[../concepts/some-page]]`.
 
-6. **Update INDEX.md** — add or update the page entry in the trilingual catalog.
+7. **Update INDEX.md** — add or update the page entry in the trilingual catalog,
+   grouped by subdirectory if applicable.
 
-7. **Append log.md** — add an entry:
+8. **Append log.md** — add an entry:
    ```
    ## [YYYY-MM-DD] ingest | Title of Source
-   - Created: [[wiki/zh/slug]], [[wiki/en/slug]], [[wiki/ja/slug]]
-   - Updated: [[wiki/zh/other-page]]
+   - Created: [[wiki/zh/agents/slug]], [[wiki/en/agents/slug]], [[wiki/ja/agents/slug]]
+   - Updated: [[wiki/zh/concepts/other-page]]
    - Conflict: <description if any, or "none">
    - Key takeaway: one sentence summary
    ```
 
-8. **Commit** — `git add -A && git commit -m "ingest: Title of Source"`
+9. **Commit** — `git add -A && git commit -m "ingest: Title of Source"`
+
+10. **Push & Create PR** — push the branch and create a pull request for review:
+    ```bash
+    git push -u origin <branch-name>
+    gh pr create --base master --head <branch-name> --title "..." --body "..."
+    ```
+    Never push directly to master. Always work on a feature branch.
 
 ### 2. Query
 
@@ -127,6 +177,7 @@ Periodic health-check of the entire wiki:
    - **Missing cross-references** — related pages that should link to each other
    - **Translation drift** — trilingual pages whose content has diverged
    - **Data gaps** — topics mentioned but never fully explored
+   - **Missing translations** — pages that exist in one language but not others
 
 2. Report findings clearly and suggest concrete actions (new sources to find,
    follow-up questions to ask, pages to merge).
@@ -144,6 +195,14 @@ Periodic health-check of the entire wiki:
 ## Git
 
 - The entire wiki lives in a git repo at `~/llm-wiki/`.
+- **Always work on a feature branch** — never commit to master directly.
 - Commit after every ingest or significant update.
 - Commit messages follow the format: `ingest: <title>` or `update: <description>`.
+- After pushing the branch, create a PR for review.
+- **After the PR is merged**, delete the feature branch (both local and remote):
+  ```bash
+  git checkout master && git pull origin master
+  git branch -d <branch-name>
+  git push origin --delete <branch-name>
+  ```
 - The repo is pushed to my private remote after each session.
