@@ -1,10 +1,14 @@
 # LLM Wiki Index
 
-> 最后更新：2026-06-08 | 总页数：9（3 主题 × 3 语言）
+> Last updated: 2026-06-08 | Total pages: 12 (4 topics × 3 languages)
 
 ---
 
 ## 中文 (zh)
+
+### ai-development
+
+- [[ai-development/sandbox-development]] — Agent 沙盒开发：隔离环境、挂载目录、两种持久化方案
 
 ### frameworks
 
@@ -40,6 +44,10 @@
 
 ## English (en)
 
+### ai-development
+
+- [[ai-development/sandbox-development]] — Agent sandbox development: isolated environments, directory mounting, two persistence approaches
+
 ### frameworks
 
 - [[frameworks/hello-agents-framework]] — HelloAgents: a lightweight educational agent framework — design philosophy and architecture
@@ -73,6 +81,10 @@
 ---
 
 ## 日本語 (ja)
+
+### ai-development
+
+- [[ai-development/sandbox-development]] — エージェントサンドボックス開発：隔離環境、ディレクトリマウント、2つの永続化手法
 
 ### frameworks
 
