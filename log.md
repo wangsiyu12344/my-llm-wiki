@@ -1,17 +1,17 @@
-# Log — 时间线 / Timeline / タイムライン
+# Log — Timeline
 
 > Append-only chronological record of all wiki operations.
 
 ---
 
-## [2026-06-08] ingest | Agent 沙盒开发 (SIYU)
+## [2026-06-08] ingest | Agent Sandbox Development (SIYU)
 
 - **Source**: SIYU — Discord #my-knowledge-base
 - **Created**:
-  - [[ai-development/sandbox-development]] (zh/en/ja) — 沙盒开发：隔离环境、挂载目录持久化
+  - [[ai-development/sandbox-development]] (zh/en/ja) — Sandbox development: isolated environments, directory mounting for persistence
 - **Updated**: *none*
 - **Conflict**: *none*
-- **Key takeaway**: 开发用沙盒 + 挂载目录（方案 A）是最佳实践，兼顾安全隔离和代码持久化。
+- **Key takeaway**: Sandbox + mounted directory (Approach A) is the best practice, balancing safety isolation with code persistence.
 
 ---
 
@@ -35,13 +35,13 @@
 
 ---
 
-## [2026-06-08] ingest | 第七章 构建你的Agent框架 (Datawhale Hello Agents)
+## [2026-06-08] ingest | Chapter 7: Building Your Agent Framework (Datawhale Hello Agents)
 
 - **Source**: [GitHub - datawhalechina/hello-agents](https://github.com/datawhalechina/hello-agents/blob/main/docs/chapter7/第七章%20构建你的Agent框架.md)
 - **Created**:
-  - [[frameworks/hello-agents-framework]] (zh/en/ja) — HelloAgents 框架概览
-  - [[frameworks/agent-paradigms]] (zh/en/ja) — 五种 Agent 范式
-  - [[frameworks/agent-llm-abstraction]] (zh/en/ja) — LLM 抽象层设计
+  - [[frameworks/hello-agents-framework]] (zh/en/ja) — HelloAgents framework overview
+  - [[frameworks/agent-paradigms]] (zh/en/ja) — Five agent paradigms
+  - [[frameworks/agent-llm-abstraction]] (zh/en/ja) — LLM abstraction layer design
 - **Updated**: *none (first ingest)*
 - **Conflict**: *none (empty wiki)*
-- **Key takeaway**: HelloAgents 以「万物皆为工具」核心理念统一抽象 Memory/RAG/MCP，通过继承扩展 + 自动检测实现多提供商 LLM 支持，渐进式实现五种 Agent 范式。
+- **Key takeaway**: HelloAgents uses "Everything is a Tool" as its core philosophy, unifying Memory/RAG/MCP abstractions, supporting multi-provider LLMs via inheritance + auto-detection, and progressively implementing five agent paradigms.

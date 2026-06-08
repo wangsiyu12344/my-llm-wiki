@@ -1,6 +1,6 @@
 # LLM Wiki Index
 
-> 最后更新：2026-06-08 | 总页数：12（4 主题 × 3 语言）
+> Last updated: 2026-06-08 | Total pages: 12 (4 topics × 3 languages)
 
 ---
 
