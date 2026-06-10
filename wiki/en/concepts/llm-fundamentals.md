@@ -65,5 +65,5 @@ The **context window** is the maximum number of tokens the model can consider wh
 
 ## Related
 
-- [[../frameworks/agent-llm-abstraction]] — How agent frameworks abstract away LLM providers
-- [[../frameworks/agent-paradigms]] — Agent paradigms that build on LLM capabilities
+- [[en/frameworks/agent-llm-abstraction]] — How agent frameworks abstract away LLM providers
+- [[en/frameworks/agent-paradigms]] — Agent paradigms that build on LLM capabilities

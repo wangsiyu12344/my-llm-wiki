@@ -45,4 +45,4 @@ hermes -p <profile> config set terminal.cwd /home/ubuntu/projects/<project>
 
 ## Related
 
-- [[../frameworks/hello-agents-framework]] — エージェントフレームワークの設計思想
+- [[ja/frameworks/hello-agents-framework]] — エージェントフレームワークの設計思想

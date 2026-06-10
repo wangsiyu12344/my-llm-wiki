@@ -1,0 +1,222 @@
+/* ================================================================
+   LLM Wiki — Custom Stylesheet
+   Dark-focused modern design with subtle animations
+   ================================================================ */
+
+/* ---------- CSS Custom Properties ---------- */
+:root {
+  --md-primary-fg-color: #5e6ad2;
+  --md-primary-fg-color--light: #7b85e0;
+  --md-primary-fg-color--dark: #484fc7;
+  --md-accent-fg-color: #8b5cf6;
+
+  /* Typography */
+  --md-text-font: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --md-code-font: "JetBrains Mono", "Fira Code", "SF Mono", Monaco, Consolas, monospace;
+}
+
+/* ---------- Dark Mode Enhancements ---------- */
+[data-md-color-scheme="slate"] {
+  --md-default-bg-color: #0d1117;
+  --md-default-bg-color--light: #161b22;
+  --md-default-bg-color--lighter: #1c2128;
+  --md-default-bg-color--lightest: #21262d;
+  --md-code-bg-color: #161b22;
+  --md-footer-bg-color: #0d1117;
+  --md-footer-bg-color--dark: #0a0e13;
+
+  --md-primary-fg-color: #6e79d6;
+  --md-primary-fg-color--light: #8b94e3;
+  --md-primary-fg-color--dark: #5b65c4;
+  --md-accent-fg-color: #a78bfa;
+}
+
+/* ---------- Typography ---------- */
+.md-typeset {
+  font-size: 0.95rem;
+  line-height: 1.7;
+}
+
+.md-typeset h1 {
+  font-weight: 700;
+  font-size: 2em;
+  letter-spacing: -0.02em;
+  color: var(--md-primary-fg-color--light);
+  margin-bottom: 0.5em;
+}
+
+.md-typeset h2 {
+  font-weight: 600;
+  font-size: 1.45em;
+  letter-spacing: -0.01em;
+  margin-top: 2em;
+  padding-bottom: 0.3em;
+  border-bottom: 2px solid var(--md-default-fg-color--lightest);
+}
+
+.md-typeset h3 {
+  font-weight: 600;
+  font-size: 1.15em;
+  margin-top: 1.5em;
+}
+
+.md-typeset a {
+  color: var(--md-accent-fg-color);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.md-typeset a:hover {
+  color: var(--md-primary-fg-color--light);
+  text-decoration: underline;
+}
+
+/* ---------- Navigation ---------- */
+.md-nav__link {
+  transition: color 0.15s ease;
+}
+
+.md-nav__link:hover {
+  color: var(--md-accent-fg-color);
+}
+
+.md-nav__item--active > .md-nav__link {
+  font-weight: 600;
+  color: var(--md-primary-fg-color--light);
+}
+
+/* ---------- Cards for Index Pages ---------- */
+.md-typeset .grid.cards {
+  grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
+}
+
+.md-typeset .grid.cards > * {
+  border: 1px solid var(--md-default-fg-color--lightest);
+  border-radius: 0.75rem;
+  padding: 1.25rem;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  background: var(--md-default-bg-color--light);
+}
+
+.md-typeset .grid.cards > *:hover {
+  border-color: var(--md-accent-fg-color);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+.md-typeset .grid.cards > * h2,
+.md-typeset .grid.cards > * h3 {
+  margin-top: 0;
+  color: var(--md-primary-fg-color--light);
+}
+
+/* ---------- Code Blocks ---------- */
+.md-typeset code {
+  border-radius: 0.35rem;
+  padding: 0.15em 0.4em;
+  font-size: 0.9em;
+}
+
+.md-typeset pre > code {
+  border-radius: 0.6rem;
+  padding: 1rem 1.2rem;
+}
+
+.highlight .md-clipboard {
+  color: var(--md-default-fg-color--lighter);
+}
+
+/* ---------- Announcement Bar ---------- */
+.md-banner {
+  background: linear-gradient(135deg, var(--md-primary-fg-color--dark), var(--md-accent-fg-color));
+  color: white;
+  text-align: center;
+}
+
+/* ---------- Footer ---------- */
+.md-footer {
+  background: var(--md-footer-bg-color);
+}
+
+.md-footer-meta {
+  background: var(--md-footer-bg-color--dark);
+}
+
+/* ---------- Search ---------- */
+.md-search__input {
+  border-radius: 0.5rem;
+  background: var(--md-default-bg-color--light);
+  border: 1px solid var(--md-default-fg-color--lightest);
+  transition: all 0.2s ease;
+}
+
+.md-search__input:focus {
+  border-color: var(--md-accent-fg-color);
+  box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.15);
+}
+
+/* ---------- Scrollbar ---------- */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--md-default-bg-color);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--md-default-fg-color--lightest);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--md-default-fg-color--lighter);
+}
+
+/* ---------- Page Transition ---------- */
+.md-content {
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ---------- Admonition / Callouts ---------- */
+.md-typeset .admonition {
+  border-radius: 0.6rem;
+  border-left-width: 4px;
+  background: var(--md-admonition-bg-color, var(--md-default-bg-color--light));
+}
+
+/* ---------- Tables ---------- */
+.md-typeset table:not([class]) {
+  border-radius: 0.5rem;
+  overflow: hidden;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+}
+
+.md-typeset table:not([class]) th {
+  background: var(--md-primary-fg-color--dark);
+  color: white;
+  font-weight: 600;
+}
+
+/* ---------- Tag / Chip Style for metadata ---------- */
+.md-typeset .tag {
+  display: inline-block;
+  padding: 0.15em 0.6em;
+  border-radius: 1em;
+  font-size: 0.78em;
+  font-weight: 500;
+  background: var(--md-default-fg-color--lightest);
+  color: var(--md-default-fg-color--light);
+  margin: 0.15em;
+}
+
+/* ---------- Responsive ---------- */
+@media screen and (max-width: 76.25em) {
+  .md-typeset h1 { font-size: 1.6em; }
+  .md-typeset h2 { font-size: 1.25em; }
+}

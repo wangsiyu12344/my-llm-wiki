@@ -1,33 +1,56 @@
 site_name: LLM Wiki
-site_description: Personal LLM knowledge base — trilingual (zh/en/ja)
+site_description: Personal LLM knowledge base — trilingual (zh / en / ja)
+site_url: https://wangsiyu12344.github.io/my-llm-wiki/
 docs_dir: wiki
 repo_url: https://github.com/wangsiyu12344/my-llm-wiki
+repo_name: wangsiyu12344/my-llm-wiki
 edit_uri: edit/master/wiki/
 
 theme:
   name: material
   language: zh
+  logo: null
+  favicon: null
   features:
     - navigation.tabs
+    - navigation.tabs.sticky
     - navigation.indexes
     - navigation.top
+    - navigation.tracking
+    - navigation.instant
+    - navigation.instant.progress
+    - navigation.path
     - search.suggest
     - search.highlight
+    - search.share
+    - content.code.copy
+    - content.code.annotate
+    - toc.follow
   palette:
     - media: "(prefers-color-scheme: light)"
       scheme: default
-      primary: indigo
-      accent: indigo
+      primary: custom
+      accent: custom
       toggle:
-        icon: material/brightness-7
+        icon: material/weather-sunny
         name: Switch to dark mode
     - media: "(prefers-color-scheme: dark)"
       scheme: slate
-      primary: indigo
-      accent: indigo
+      primary: custom
+      accent: custom
       toggle:
-        icon: material/brightness-4
+        icon: material/weather-night
         name: Switch to light mode
+  font:
+    text: Inter
+    code: JetBrains Mono
+  icon:
+    repo: fontawesome/brands/github
+    edit: material/pencil
+    view: material/eye
+
+extra_css:
+  - stylesheets/extra.css
 
 plugins:
   - roamlinks
@@ -35,12 +58,31 @@ plugins:
       lang: [zh, en, ja]
 
 markdown_extensions:
-  - pymdownx.highlight
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
   - pymdownx.superfences
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.details
+  - pymdownx.tabbed:
+      alternate_style: true
   - admonition
   - footnotes
+  - attr_list
+  - md_in_html
+  - toc:
+      permalink: "🔗"
 
 extra:
+  generator: false
   social:
     - icon: fontawesome/brands/github
       link: https://github.com/wangsiyu12344/my-llm-wiki
+      name: LLM Wiki on GitHub
+  analytics: null
+
+copyright: >
+  Built with <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">Material for MkDocs</a>
+  &nbsp;·&nbsp; © 2025–2026 Siyu Wang
