@@ -20,7 +20,7 @@ frameworks, and everything in between. Built following
 
 <div class="grid cards" markdown>
 
--   ### :flag_cn: 中文 (zh)
+-   ### :material-translate: 中文 (zh)
 
     ---
 
@@ -28,7 +28,7 @@ frameworks, and everything in between. Built following
 
     [:octicons-arrow-right-24: 浏览中文页面](zh/index.md)
 
--   ### :flag_us: English (en)
+-   ### :material-translate: English (en)
 
     ---
 
@@ -36,7 +36,7 @@ frameworks, and everything in between. Built following
 
     [:octicons-arrow-right-24: Browse English pages](en/index.md)
 
--   ### :flag_jp: 日本語 (ja)
+-   ### :material-translate: 日本語 (ja)
 
     ---
 
