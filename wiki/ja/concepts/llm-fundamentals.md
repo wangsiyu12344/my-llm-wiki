@@ -65,5 +65,5 @@ LLM への各呼び出しは**ステートレス**です——モデルは呼び
 
 ## Related
 
-- [[../frameworks/agent-llm-abstraction]] — エージェントフレームワークが LLM プロバイダーを抽象化する方法
-- [[../frameworks/agent-paradigms]] — LLM の能力に基づいて構築されたエージェントパラダイム
+- [[ja/frameworks/agent-llm-abstraction]] — エージェントフレームワークが LLM プロバイダーを抽象化する方法
+- [[ja/frameworks/agent-paradigms]] — LLM の能力に基づいて構築されたエージェントパラダイム

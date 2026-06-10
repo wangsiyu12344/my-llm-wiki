@@ -65,5 +65,5 @@ Transformer 由 Google 团队提出，取代了早期的 **LSTM**（长短期记
 
 ## Related
 
-- [[../frameworks/agent-llm-abstraction]] — Agent 框架如何抽象 LLM 提供商
-- [[../frameworks/agent-paradigms]] — 基于 LLM 能力构建的 Agent 范式
+- [[zh/frameworks/agent-llm-abstraction]] — Agent 框架如何抽象 LLM 提供商
+- [[zh/frameworks/agent-paradigms]] — 基于 LLM 能力构建的 Agent 范式

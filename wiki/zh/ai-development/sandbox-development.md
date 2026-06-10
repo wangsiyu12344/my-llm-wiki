@@ -45,5 +45,5 @@ hermes -p <profile> config set terminal.cwd /home/ubuntu/projects/<project>
 
 ## Related
 
-- [[../frameworks/hello-agents-framework]] — Agent 框架设计理念
-- [[../frameworks/agent-paradigms]] — 五种 Agent 范式
+- [[zh/frameworks/hello-agents-framework]] — Agent 框架设计理念
+- [[zh/frameworks/agent-paradigms]] — 五种 Agent 范式

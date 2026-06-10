@@ -45,4 +45,4 @@ Developing in a sandbox is better than working directly on the host. Approach A 
 
 ## Related
 
-- [[../frameworks/hello-agents-framework]] — Agent framework design philosophy
+- [[en/frameworks/hello-agents-framework]] — Agent framework design philosophy
