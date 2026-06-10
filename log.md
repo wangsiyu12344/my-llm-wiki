@@ -4,6 +4,17 @@
 
 ---
 
+## [2026-06-08] ingest | LLM Fundamentals (SIYU)
+
+- **Source**: SIYU — Discord #my-knowledge-base
+- **Created**:
+  - [[concepts/llm-fundamentals]] (zh/en/ja) — Transformer architecture, tokens, context windows, model types
+- **Updated**: *none*
+- **Conflict**: *none*
+- **Key takeaway**: LLM fundamentals — stateless design (context IS memory), three model flavors (Base/Chat/Reasoning), GPT = Generative Pre-trained Transformer
+
+---
+
 ## [2026-06-08] ingest | Agent Sandbox Development (SIYU)
 
 - **Source**: SIYU — Discord #my-knowledge-base

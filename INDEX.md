@@ -1,6 +1,6 @@
 # LLM Wiki Index
 
-> Last updated: 2026-06-08 | Total pages: 12 (4 topics × 3 languages)
+> Last updated: 2026-06-08 | Total pages: 15 (5 topics × 3 languages)
 
 ---
 
@@ -18,7 +18,7 @@
 
 ### concepts
 
-*暂无*
+- [[concepts/llm-fundamentals]] — LLM 基础知识：Transformer、Token、上下文窗口、三种模型类型
 
 ### tools
 
@@ -56,7 +56,7 @@
 
 ### concepts
 
-*None yet*
+- [[concepts/llm-fundamentals]] — LLM fundamentals: Transformer, tokens, context window, three model types
 
 ### tools
 
@@ -94,7 +94,7 @@
 
 ### concepts
 
-*なし*
+- [[concepts/llm-fundamentals]] — LLM 基礎知識：Transformer、トークン、コンテキストウィンドウ、3つのモデルタイプ
 
 ### tools
 
