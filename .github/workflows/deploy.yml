@@ -18,11 +18,12 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Install uv
-        uses: astral-sh/setup-uv@v5
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
 
       - name: Install dependencies
-        run: uv pip install --system mkdocs-material mkdocs-roamlinks-plugin
+        run: pip install mkdocs-material mkdocs-roamlinks-plugin
 
       - name: Build site
         run: mkdocs build
