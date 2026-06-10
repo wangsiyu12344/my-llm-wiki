@@ -17,8 +17,6 @@ theme:
     - navigation.indexes
     - navigation.top
     - navigation.tracking
-    - navigation.instant
-    - navigation.instant.progress
     - navigation.path
     - search.suggest
     - search.highlight
@@ -76,7 +74,7 @@ markdown_extensions:
   - attr_list
   - md_in_html
   - toc:
-      permalink: "🔗"
+      permalink: true
 
 extra:
   generator: false
