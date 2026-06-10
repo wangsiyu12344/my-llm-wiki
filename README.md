@@ -20,12 +20,6 @@ Every topic exists in all three languages with semantically identical content.
 - Trilingual pages are created/updated automatically
 - All changes go through PR review before merging
 
-## Topics
-
-→ **Frameworks** — Agent frameworks and their design (HelloAgents)
-→ **AI Development** — Agent sandboxing, dev workflows
-→ **Concepts** — LLM fundamentals, Transformer architecture, tokens
-
 ## Tech
 
 → MkDocs + Material theme for browsing
