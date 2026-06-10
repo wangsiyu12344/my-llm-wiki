@@ -3,7 +3,7 @@ hide:
   - toc
 ---
 
-# :flag_cn: 中文知识库
+# 中文知识库
 
 <div class="grid cards" markdown>
 

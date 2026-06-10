@@ -3,7 +3,7 @@ hide:
   - toc
 ---
 
-# :flag_jp: 日本語ナレッジベース
+# 日本語ナレッジベース
 
 <div class="grid cards" markdown>
 

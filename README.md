@@ -2,6 +2,8 @@
 
 My personal, compounding knowledge base for LLMs and AI — built following [Andrej Karpathy's LLM Wiki pattern](https://gist.github.com/karpathy/442a6bf555914893e9891c11519de94f).
 
+:rocket: **Live site:** [wangsiyu12344.github.io/my-llm-wiki](https://wangsiyu12344.github.io/my-llm-wiki/)
+
 ## Structure
 
 ```

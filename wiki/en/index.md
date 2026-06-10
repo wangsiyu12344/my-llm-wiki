@@ -3,7 +3,7 @@ hide:
   - toc
 ---
 
-# :flag_us: English Knowledge Base
+# English Knowledge Base
 
 <div class="grid cards" markdown>
 
